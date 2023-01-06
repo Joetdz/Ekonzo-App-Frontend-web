@@ -1,30 +1,70 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { CiUser } from "react-icons/ci"
 import { CiLock } from "react-icons/ci"
 import { FcGoogle } from "react-icons/fc"
 import { useFormInputValidation } from "react-form-input-validation"
+import { Link, useNavigate } from "react-router-dom"
+import { ToastContainer, toast } from "react-toastify"
+import axios from "axios"
+import AuthLoader from "../Components/AuthLoader"
+import { accountService } from "../Services/Account.Service"
 
 const Login = () => {
+  const navigate = useNavigate()
+
+  const [isLoading, setIsLoading] = useState(false)
+
+  const notify = (message) => {
+    toast(message)
+  }
+  const login = (credentials) => {
+    setIsLoading(true)
+
+    axios({
+      method: "post",
+      url: `${process.env.REACT_APP_BASE_URL}/user/login`,
+      data: credentials,
+    })
+      .then((data) => {
+        console.log(data)
+        setIsLoading(false)
+        notify("Connexion Réusie")
+        accountService.saveToken(data.data.token)
+      })
+      .catch((err) => {
+        setIsLoading(false)
+        if (err.message === "Network Error") {
+          notify(err.message)
+        } else {
+          notify(err.response.data)
+        }
+      })
+  }
   const [fields, errors, form] = useFormInputValidation(
     {
-      name: "",
+      email: "",
       password: "",
     },
     {
-      name: "required|email",
+      email: "required|email",
 
       password: "required",
     }
   )
   const onSubmit = async (event) => {
+    event.preventDefault()
     const isValid = await form.validate(event)
     if (isValid) {
       console.log(fields, errors)
-      // Perform api call here
+      login(fields)
     } else {
       console.log(fields, errors)
     }
   }
+  useEffect(() => {
+    accountService.isLogged() ? navigate("/home") : ""
+  }, [accountService.isLogged()])
+
   return (
     <div className="login-page">
       <div className="login-illustration">
@@ -44,7 +84,7 @@ const Login = () => {
             {" "}
             <CiUser />
             <input
-              name="name"
+              name="email"
               onBlur={form.handleBlurEvent}
               onChange={form.handleChangeEvent}
               value={fields.name}
@@ -52,13 +92,7 @@ const Login = () => {
               placeholder="Email ou numéro"
             />
           </div>
-          {errors.name ? (
-            <>
-              <p className="error-text">{errors.name ? errors.name : ""}</p>
-            </>
-          ) : (
-            ""
-          )}
+
           <div className={errors.name ? "input-group errors" : "input-group "}>
             {" "}
             <CiLock />
@@ -71,18 +105,9 @@ const Login = () => {
               placeholder="Mot de passe"
             />
           </div>
-          {errors.name ? (
-            <>
-              <p className="error-text">
-                {errors.password ? errors.password : ""}
-              </p>
-            </>
-          ) : (
-            ""
-          )}
 
           <button type="submit" className="login-btn-local">
-            Connexion
+            Connexion {isLoading ? <AuthLoader /> : ""}
           </button>
           <button className="login-btn-google">
             Se connecter avec
@@ -90,8 +115,9 @@ const Login = () => {
               <FcGoogle />
             </span>
           </button>
+          <ToastContainer />
           <span className="text-register">
-            Si vous n avez pas un compte inscrivez vous{" "}
+            Si vous n avez pas un compte<Link to="/signup">inscrivez vous</Link>
           </span>
         </form>
       </div>

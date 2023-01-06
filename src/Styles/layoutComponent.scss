@@ -1,0 +1,21 @@
+.header {
+    background-color: $Primary-color;
+    height: 10vh;
+    color: $Tertiary-color;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: solid 1px #0000003a;
+    position: fixed;
+    bottom: 0%;
+    height: 8.6vh;
+    width: 100%;
+}

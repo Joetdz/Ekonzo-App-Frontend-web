@@ -1,18 +1,31 @@
-import React from "react"
+import React, { useState } from "react"
 import { AiOutlineUser } from "react-icons/ai"
 import { BsTelephone } from "react-icons/bs"
 import { HiOutlineLockClosed } from "react-icons/hi"
 import { CiMail } from "react-icons/ci"
+import axios from "axios"
 
 import { FcGoogle } from "react-icons/fc"
 import { useFormInputValidation } from "react-form-input-validation"
+import { Link } from "react-router-dom"
+import { ToastContainer, toast } from "react-toastify"
+import { accountService } from "../Services/Account.Service"
+
+import "react-toastify/dist/ReactToastify.css"
+import AuthLoader from "../Components/AuthLoader"
+
 const Signup = () => {
+  const [isLoading, setIsLoading] = useState(false)
+
+  const notify = (message) => {
+    toast(message)
+  }
   const [fields, errors, form] = useFormInputValidation(
     {
       nom: "",
       prenom: "",
       tel: "",
-      mail: "",
+      email: "",
       password: "",
       passwordConfirm: "",
     },
@@ -20,20 +33,55 @@ const Signup = () => {
       nom: "required",
       prenom: "required",
       tel: "required",
-      mail: "required|email",
+      email: "required|email",
       password: "required",
       passwordConfirm: "required",
     }
   )
+
+  const RegisterUser = (credentials) => {
+    setIsLoading(true)
+    axios({
+      method: "post",
+      url: `${process.env.REACT_APP_BASE_URL}/user/signup`,
+      data: credentials,
+    })
+      .then((data) => {
+        console.log(data)
+        setIsLoading(false)
+        notify("votre compte  a été créé avec succés")
+        accountService.saveToken(data.token)
+      })
+      .catch((err) => {
+        setIsLoading(false)
+        if (err.message === "Network Error") {
+          notify(err.message)
+        } else {
+          notify(err.response.data)
+        }
+      })
+  }
+
   const onSubmit = async (event) => {
+    event.preventDefault()
+
     const isValid = await form.validate(event)
     if (isValid) {
-      console.log(fields, errors)
-      // Perform api call here
+      console.log(fields)
+      if (fields.password !== fields.passwordConfirm) {
+        notify("les mots de passe ne sont pas identiques")
+      } else {
+        setIsLoading(true)
+        RegisterUser(fields)
+      }
+
+      console.log("ok", fields, "erro", errors)
     } else {
-      console.log(fields, errors)
+      console.log(errors)
+      notify("Vueillez remplir tous le champs correctement")
     }
   }
+
   return (
     <div className="signup-page">
       <div className="login-illustration">
@@ -46,7 +94,7 @@ const Signup = () => {
           <form
             className="form"
             noValidate
-            autoComplete="on"
+            autoComplete="off"
             onSubmit={onSubmit}
             lang="fr"
           >
@@ -57,14 +105,26 @@ const Signup = () => {
                 }
               >
                 <AiOutlineUser />
-                <input type="text" name="prenom" placeholder="Prenom" />
+                <input
+                  type="text"
+                  onBlur={form.handleBlurEvent}
+                  onChange={form.handleChangeEvent}
+                  name="prenom"
+                  placeholder="Prenom"
+                />
               </div>
 
               <div
                 className={errors.nom ? "input-detail errors" : "input-detail "}
               >
                 <AiOutlineUser />
-                <input type="text" name="nom" placeholder="Nom" />
+                <input
+                  type="text"
+                  onBlur={form.handleBlurEvent}
+                  onChange={form.handleChangeEvent}
+                  name="nom"
+                  placeholder="Nom"
+                />
               </div>
             </div>
 
@@ -73,7 +133,13 @@ const Signup = () => {
                 className={errors.tel ? "input-detail errors" : "input-detail "}
               >
                 <BsTelephone />
-                <input type="tel" name="tel" placeholder="Numéro" />
+                <input
+                  type="tel"
+                  onBlur={form.handleBlurEvent}
+                  onChange={form.handleChangeEvent}
+                  name="tel"
+                  placeholder="Numéro"
+                />
               </div>
             </div>
             <div className="input-group numero">
@@ -83,7 +149,13 @@ const Signup = () => {
                 }
               >
                 <CiMail />
-                <input type="email" name="mail" placeholder="Addresse email" />
+                <input
+                  type="email"
+                  onBlur={form.handleBlurEvent}
+                  onChange={form.handleChangeEvent}
+                  name="email"
+                  placeholder="Addresse email"
+                />
               </div>
             </div>
             <div className="input-group">
@@ -96,6 +168,8 @@ const Signup = () => {
                 <input
                   type="password"
                   name="password"
+                  onBlur={form.handleBlurEvent}
+                  onChange={form.handleChangeEvent}
                   placeholder="Mot de passe"
                 />
               </div>
@@ -110,6 +184,8 @@ const Signup = () => {
                 <input
                   type="password"
                   name="passwordConfirm"
+                  onBlur={form.handleBlurEvent}
+                  onChange={form.handleChangeEvent}
                   placeholder="confirmer mot de passe "
                 />
               </div>
@@ -117,15 +193,18 @@ const Signup = () => {
 
             <div className="input-group numero">
               <button type="submit" className="login-btn-local">
-                S incrire
+                S incrire {isLoading ? <AuthLoader /> : ""}
               </button>
               <button className="login-btn-google">
                 <span className="icon-connexion">
                   <FcGoogle />
                 </span>
               </button>
+
+              <ToastContainer />
               <span className="login-span">
-                Si vous avez déja un compte connectez vous{" "}
+                Si vous avez déja un compte
+                <Link to="/login">connectez vous</Link>
               </span>
             </div>
           </form>
