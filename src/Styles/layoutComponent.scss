@@ -7,7 +7,8 @@
     align-items: center;
     padding: 2%;
     border-radius: 0 0 4px 4px;
-
+    position: sticky;
+    top: 0;
 
     .logo {
         height: 54px;
@@ -43,6 +44,7 @@
     height: 10vh;
     width: 100%;
     padding: 2%;
+    background-color: $Tertiary-color;
 
 
 

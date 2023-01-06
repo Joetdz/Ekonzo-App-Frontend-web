@@ -9,7 +9,7 @@ const Footer = () => {
   return (
     <div className="footer">
       <div className="group-home">
-        <Link>
+        <Link to="/home">
           <span className="icon">
             <TbHome />
           </span>

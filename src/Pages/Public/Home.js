@@ -1,19 +1,58 @@
-import React, { useEffect } from "react"
-import { Link, useNavigate } from "react-router-dom"
-import { accountService } from "../../Services/Account.Service"
+import React from "react"
 
 const Home = () => {
-  const navigate = useNavigate()
-  useEffect(() => {
-    accountService.isLogged() ? "" : navigate("/home")
-  }, [])
   return (
-    <div>
-      {accountService.isLogged() ? (
-        <Link onClick={accountService.logout()}>Se deconnecter</Link>
-      ) : (
-        <Link to="/login">Se connecter</Link>
-      )}
+    <div className="home">
+      <section className="ekz-classique">
+        <h1 className="section-title">Cartes d'epargne</h1>
+        <div className="cards-container">
+          <div className="card">
+            <div className="raka-raka"></div>
+            <span className="detail">commencez</span>
+          </div>
+          <div className="card">
+            <div className="piyo"></div>
+            <span className="detail">commencez</span>
+          </div>
+          <div className="card">
+            <div className="mopao"></div>
+            <span className="detail">commencez</span>
+          </div>
+        </div>
+      </section>
+
+      <section className="mayele-na-ekz">
+        <h1 className="section-title">Astuces d'épargne</h1>
+        <div className="mayele-container">
+          <div className="illutration-mayele">
+            {" "}
+            <img src="Financeapp-pana1.png" />
+          </div>
+          <div className="description">
+            <h2>Mayele na Ekonzo</h2>
+            <p>
+              Economisez votre argent avec les intéret composées de maniere fun
+              et sans pression
+            </p>
+            <button>En savoir plus</button>
+          </div>
+        </div>
+      </section>
+
+      <section className="mayele-na-ekz">
+        <div className="mayele-container">
+          <div className="illutration">
+            <img src="amico.png"></img>
+          </div>
+          <div className="description">
+            <h2>Yebela masta</h2>
+            <p>
+              Invite des amis et gagne 10% du montant fixe de leurs epargnes
+            </p>
+            <button>En savoir plus</button>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }
