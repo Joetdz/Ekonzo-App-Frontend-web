@@ -30,11 +30,14 @@ p {
 
 
 
-.ekz-classique {
+.ekz-classique,
+.buy-cards-section,
+.no-card-page {
     display: flex;
     flex-direction: column;
 
-    .cards-container {
+    .cards-container,
+    .no-card-section {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -77,6 +80,39 @@ p {
 
 
 }
+
+
+
+.no-card-page {
+    justify-content: space-between;
+    gap: 2vh;
+    padding-bottom: 2%;
+
+    .no-card-section {
+        flex-direction: column;
+        padding: 8%;
+
+        p {
+            text-align: center;
+            font-size: 18px;
+            padding: 2% 0;
+        }
+
+    }
+
+    .buy-cards-section {
+        gap: 2h;
+
+        .explication {
+            text-align: center;
+            padding: 4% 2%;
+            font-weight: 300;
+            font-size: 16px;
+        }
+    }
+}
+
+
 
 .mayele-na-ekz {
     display: flex;

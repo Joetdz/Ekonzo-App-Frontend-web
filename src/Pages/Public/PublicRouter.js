@@ -6,6 +6,7 @@ import Home from "./Home"
 import Layout from "./Layout"
 import Login from "../Login"
 import Signup from "../Signup"
+import Cards from "./Cards"
 
 const PublicRouter = () => {
   return (
@@ -14,6 +15,7 @@ const PublicRouter = () => {
         <Route index element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="*" element={<Errors />} />
+        <Route path="/cards" element={<Cards />} />
       </Route>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
