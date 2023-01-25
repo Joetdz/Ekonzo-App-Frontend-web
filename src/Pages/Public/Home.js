@@ -3,6 +3,7 @@ import React from "react"
 const Home = () => {
   return (
     <div className="home">
+      <section className="banner"></section>
       <section className="ekz-classique">
         <h1 className="section-title">Cartes d'epargne</h1>
         <div className="cards-container">
@@ -30,10 +31,7 @@ const Home = () => {
           </div>
           <div className="description">
             <h2>Mayele na Ekonzo</h2>
-            <p>
-              Economisez votre argent avec les intéret composées de maniere fun
-              et sans pression
-            </p>
+
             <button>En savoir plus</button>
           </div>
         </div>
@@ -46,9 +44,7 @@ const Home = () => {
           </div>
           <div className="description">
             <h2>Yebela masta</h2>
-            <p>
-              Invite des amis et gagne 10% du montant fixe de leurs epargnes
-            </p>
+
             <button>En savoir plus</button>
           </div>
         </div>

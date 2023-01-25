@@ -3,14 +3,14 @@ import { CiUser } from "react-icons/ci"
 import { CiLock } from "react-icons/ci"
 import { FcGoogle } from "react-icons/fc"
 import { useFormInputValidation } from "react-form-input-validation"
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { ToastContainer, toast } from "react-toastify"
 import axios from "axios"
 import AuthLoader from "../Components/AuthLoader"
 import { accountService } from "../Services/Account.Service"
 
 const Login = () => {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -61,9 +61,7 @@ const Login = () => {
       console.log(fields, errors)
     }
   }
-  useEffect(() => {
-    accountService.isLogged() ? navigate("/home") : ""
-  }, [accountService.isLogged()])
+  useEffect(() => {}, [])
 
   return (
     <div className="login-page">

@@ -78,7 +78,9 @@ const Signup = () => {
       console.log("ok", fields, "erro", errors)
     } else {
       console.log(errors)
-      notify("Vueillez remplir tous le champs correctement")
+      notify("Vueillez renseigner correctement tous les champs")
+      if (errors.email) notify("Vueillez insérer un email valide")
+      if (errors.tel) notify("Vueillez insérer un numéro valide")
     }
   }
 

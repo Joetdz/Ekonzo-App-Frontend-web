@@ -30,6 +30,7 @@ p {
 
 
 
+
 .ekz-classique,
 .buy-cards-section,
 .no-card-page {
@@ -133,7 +134,9 @@ p {
 
 
         .description {
+            display: grid;
             padding: 2px 0;
+            gap: 12px;
 
             p {
                 margin: 3px 0;

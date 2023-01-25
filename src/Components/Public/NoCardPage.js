@@ -1,6 +1,8 @@
 import React from "react"
+import { Link } from "react-router-dom"
 
 const NoCardPage = () => {
+  const navigate = (to) => {}
   return (
     <div className="no-card-page">
       <section className="no-card-section">
@@ -18,9 +20,12 @@ const NoCardPage = () => {
         </p>
         <div className="cards-container">
           <div className="card">
-            <div className="raka-raka"></div>
-            <span className="detail">commencez</span>
+            <Link to="/buy-card">
+              <div className="raka-raka"></div>
+              <span className="detail">commencez</span>
+            </Link>
           </div>
+
           <div className="card">
             <div className="piyo"></div>
             <span className="detail">commencez</span>

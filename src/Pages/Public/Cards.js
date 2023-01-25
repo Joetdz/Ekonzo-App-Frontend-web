@@ -1,4 +1,4 @@
-import React from "react"
+import CardListPage from "../../Components/Public/CardListPage"
 import NoCardPage from "../../Components/Public/NoCardPage"
 
 const Cards = () => {
