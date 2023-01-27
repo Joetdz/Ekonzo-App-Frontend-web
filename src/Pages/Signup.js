@@ -79,8 +79,6 @@ const Signup = () => {
     } else {
       console.log(errors)
       notify("Vueillez renseigner correctement tous les champs")
-      if (errors.email) notify("Vueillez insérer un email valide")
-      if (errors.tel) notify("Vueillez insérer un numéro valide")
     }
   }
 
@@ -195,7 +193,7 @@ const Signup = () => {
 
             <div className="input-group numero">
               <button type="submit" className="login-btn-local">
-                S incrire {isLoading ? <AuthLoader /> : ""}
+                S&#39incrire {isLoading ? <AuthLoader /> : ""}
               </button>
               <button className="login-btn-google">
                 <span className="icon-connexion">
