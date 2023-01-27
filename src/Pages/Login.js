@@ -22,7 +22,7 @@ const Login = () => {
 
     axios({
       method: "post",
-      url: `${process.env.REACT_APP_BASE_URL}/user/login`,
+      url: `${process.env.REACT_APP_BASE_URL}user/login`,
       data: credentials,
     })
       .then((data) => {

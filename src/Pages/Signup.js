@@ -43,7 +43,7 @@ const Signup = () => {
     setIsLoading(true)
     axios({
       method: "post",
-      url: `${process.env.REACT_APP_BASE_URL}/user/signup`,
+      url: `${process.env.REACT_APP_BASE_URL}user/signup`,
       data: credentials,
     })
       .then((data) => {

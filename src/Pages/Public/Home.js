@@ -21,7 +21,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
       <section className="mayele-na-ekz">
         <h1 className="section-title">Astuces d'épargne</h1>
         <div className="mayele-container">
@@ -36,7 +35,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
       <section className="mayele-na-ekz">
         <div className="mayele-container">
           <div className="illutration">
