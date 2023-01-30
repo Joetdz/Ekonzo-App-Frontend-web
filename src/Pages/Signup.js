@@ -4,8 +4,8 @@ import { BsTelephone } from "react-icons/bs"
 import { HiOutlineLockClosed } from "react-icons/hi"
 import { CiMail } from "react-icons/ci"
 import axios from "axios"
+import FacebookLogin from "react-facebook-login"
 
-import { FcGoogle } from "react-icons/fc"
 import { useFormInputValidation } from "react-form-input-validation"
 import { Link } from "react-router-dom"
 import { ToastContainer, toast } from "react-toastify"
@@ -16,6 +16,9 @@ import AuthLoader from "../Components/AuthLoader"
 
 const Signup = () => {
   const [isLoading, setIsLoading] = useState(false)
+  const responseFacebook = (response) => {
+    console.log(response)
+  }
 
   const notify = (message) => {
     toast(message)
@@ -200,11 +203,12 @@ const Signup = () => {
               <button type="submit" className="login-btn-local">
                 S&#39incrire {isLoading ? <AuthLoader /> : ""}
               </button>
-              <button className="login-btn-google">
-                <span className="icon-connexion">
-                  <FcGoogle />
-                </span>
-              </button>
+              <span className="login-btn-google">
+                <FacebookLogin
+                  appId="1642328976201121"
+                  callback={responseFacebook}
+                />
+              </span>
 
               <ToastContainer />
               <span className="login-span">
