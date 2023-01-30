@@ -45,6 +45,11 @@ const Signup = () => {
       method: "post",
       url: `${process.env.REACT_APP_BASE_URL}user/signup`,
       data: credentials,
+      mode: "no-cors",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
     })
       .then((data) => {
         console.log(data)
