@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useContext } from "react"
 import { CiUser } from "react-icons/ci"
 import { CiLock } from "react-icons/ci"
 import { FcGoogle } from "react-icons/fc"
@@ -7,12 +7,17 @@ import { Link } from "react-router-dom"
 import { ToastContainer, toast } from "react-toastify"
 import axios from "axios"
 import AuthLoader from "../Components/AuthLoader"
-import { accountService } from "../Services/Account.Service"
+import { AccountService } from "../Services/Account.Service"
+import publicContext from "../Services/Context.Service"
+import { useNavigate } from "react-router-dom"
 
 const Login = () => {
   // const navigate = useNavigate()
+  const { userisLogged, setUserIslogged } = useContext(publicContext)
 
   const [isLoading, setIsLoading] = useState(false)
+
+  const navigate = useNavigate()
 
   const notify = (message) => {
     toast(message)
@@ -28,8 +33,13 @@ const Login = () => {
       .then((data) => {
         console.log(data)
         setIsLoading(false)
-        notify("Connexion Réusie")
-        accountService.saveToken(data.data.token)
+        notify("Connexion Réusie !")
+        setTimeout(() => {
+          AccountService.saveToken(data.data.token)
+          AccountService.SaveCurrentUserInfo(data.data.userId)
+          console.log("salut token")
+          setUserIslogged(true)
+        }, 3000)
       })
       .catch((err) => {
         setIsLoading(false)
@@ -42,11 +52,11 @@ const Login = () => {
   }
   const [fields, errors, form] = useFormInputValidation(
     {
-      email: "",
+      numero: "",
       password: "",
     },
     {
-      email: "required|email",
+      numero: "required",
 
       password: "required",
     }
@@ -58,10 +68,14 @@ const Login = () => {
       console.log(fields, errors)
       login(fields)
     } else {
-      console.log(fields, errors)
+      console.log(errors)
+      notify("Vueillez renseigner correctement tous les champs")
     }
   }
-  useEffect(() => {}, [])
+  useEffect(() => {
+    userisLogged && navigate("/home")
+    console.log(userisLogged)
+  })
 
   return (
     <div className="login-page">
@@ -74,7 +88,7 @@ const Login = () => {
         <form
           className="form"
           noValidate
-          autoComplete="on"
+          autoComplete="off"
           onSubmit={onSubmit}
           lang="fr"
         >
@@ -82,12 +96,11 @@ const Login = () => {
             {" "}
             <CiUser />
             <input
-              name="email"
+              name="numero"
               onBlur={form.handleBlurEvent}
               onChange={form.handleChangeEvent}
-              value={fields.name}
               type="tel"
-              placeholder="Email ou numéro"
+              placeholder="numéro"
             />
           </div>
 
@@ -98,7 +111,6 @@ const Login = () => {
               name="password"
               onBlur={form.handleBlurEvent}
               onChange={form.handleChangeEvent}
-              value={fields.password}
               type="password"
               placeholder="Mot de passe"
             />

@@ -4,16 +4,24 @@ const saveToken = (token) => {
 
 const logout = () => {
   localStorage.removeItem("token")
+  localStorage.removeItem("userID")
 }
 
 const isLogged = () => {
   let token = localStorage.getItem("token")
-
   return !!token
 }
-
-export const accountService = {
+const SaveCurrentUserInfo = (user) => {
+  localStorage.setItem("userID", user)
+}
+const getUserIdInLocalStorage = () => {
+  let userId = localStorage.getItem("userID")
+  return userId
+}
+export const AccountService = {
   saveToken,
   logout,
   isLogged,
+  SaveCurrentUserInfo,
+  getUserIdInLocalStorage,
 }

@@ -9,13 +9,16 @@ import FacebookLogin from "react-facebook-login"
 import { useFormInputValidation } from "react-form-input-validation"
 import { Link } from "react-router-dom"
 import { ToastContainer, toast } from "react-toastify"
-import { accountService } from "../Services/Account.Service"
+import { AccountService } from "../Services/Account.Service"
+import { useNavigate } from "react-router-dom"
 
 import "react-toastify/dist/ReactToastify.css"
 import AuthLoader from "../Components/AuthLoader"
+import { useEffect } from "react"
 
 const Signup = () => {
   const [isLoading, setIsLoading] = useState(false)
+  const navigate = useNavigate()
   const responseFacebook = (response) => {
     console.log(response)
   }
@@ -58,7 +61,8 @@ const Signup = () => {
         console.log(data)
         setIsLoading(false)
         notify("votre compte  a été créé avec succés")
-        accountService.saveToken(data.token)
+        AccountService.saveToken(data.data.token)
+        AccountService.SaveCurrentUserInfo(data.data.userId)
       })
       .catch((err) => {
         setIsLoading(false)
@@ -89,6 +93,9 @@ const Signup = () => {
       notify("Vueillez renseigner correctement tous les champs")
     }
   }
+  useEffect(() => {
+    AccountService.isLogged() && navigate("/home")
+  })
 
   return (
     <div className="signup-page">
@@ -201,7 +208,8 @@ const Signup = () => {
 
             <div className="input-group numero">
               <button type="submit" className="login-btn-local">
-                S&#39incrire {isLoading ? <AuthLoader /> : ""}
+                {"S'²incrire "}
+                {isLoading ? <AuthLoader /> : ""}
               </button>
               <span className="login-btn-google">
                 <FacebookLogin
