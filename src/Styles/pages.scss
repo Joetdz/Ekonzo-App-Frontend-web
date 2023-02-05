@@ -22,7 +22,13 @@ section {
     border-radius: 0% 0% 8px 8px;
 
     span {
-        font-size: 30px;
+        font-size: 24px;
+    }
+
+    h4 {
+        padding-top: 2%;
+        font-size: 12px;
+        font-weight: 300;
     }
 
     .separator {
@@ -33,9 +39,9 @@ section {
 }
 
 .section-title {
-    font-size: 18px;
+    font-size: 14px;
     margin-bottom: 10px;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 h2 {
@@ -140,44 +146,9 @@ p {
 .mayele-na-ekz {
     display: flex;
     flex-direction: column;
+    padding: 2%;
 
-    .mayele-container {
-        display: grid;
-        grid-template-columns: 20% 80%;
-        justify-content: space-between;
-        align-items: center;
-        padding: 4% 2%;
-        border: solid 1px rgba(0, 0, 0, 0.089);
-        border-radius: 8px;
-
-        gap: 2%;
-
-
-
-
-        .description {
-            display: flex;
-            flex-direction: column;
-            padding: 2px 0;
-            gap: 2vh;
-
-            p {
-                margin: 3px 0;
-            }
-
-            button {
-                display: flex;
-                all: unset;
-                border: solid 1px $Primary-color;
-                padding: 1% 6%;
-                border-radius: 8px;
-                color: $Primary-color;
-                font-size: 10px;
-                align-self: flex-start;
-
-            }
-        }
-    }
+    .mayele-container {}
 }
 
 

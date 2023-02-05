@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import { CgLogOut } from "react-icons/cg"
 import publicContext from "../../Services/Context.Service"
 import { TimeServices } from "../../Services/Time.Service"
@@ -8,21 +8,26 @@ import { useNavigate } from "react-router-dom"
 
 const Header = () => {
   const { user, userisLogged, setUserIslogged } = useContext(publicContext)
+  const [salutation, setSalutation] = useState(
+    TimeServices.getSalutationBytime()
+  )
   const navigate = useNavigate()
   const logout = () => {
     AccountService.logout()
     setUserIslogged(false)
   }
   useEffect(() => {
+    setSalutation(TimeServices.getSalutationBytime())
     !userisLogged && navigate("/login")
+
     console.log(userisLogged)
-  }, [])
+  }, [userisLogged, salutation])
   return (
     <div className="header">
       <div className="logo"></div>
-      <span>
+      <span className="salutation">
         {" "}
-        {TimeServices.getSalutationBytime()} {user && user.prenom} !
+        {salutation} {user && user.prenom} !
       </span>
       <div className="notif">
         <CgLogOut onClick={logout} />

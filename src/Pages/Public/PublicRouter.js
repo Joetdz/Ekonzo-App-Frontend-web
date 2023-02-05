@@ -27,7 +27,7 @@ const PublicRouter = () => {
   useEffect(() => {
     getUserconnected(AccountService.getUserIdInLocalStorage())
     console.log(user, "fff")
-  }, [])
+  }, [userisLogged])
   return (
     <publicContext.Provider
       value={{ user, setUser, userisLogged, setUserIslogged }}

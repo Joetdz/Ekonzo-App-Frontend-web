@@ -1,16 +1,16 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import { AiOutlineUser } from "react-icons/ai"
 import { BsTelephone } from "react-icons/bs"
 import { HiOutlineLockClosed } from "react-icons/hi"
 import { CiMail } from "react-icons/ci"
 import axios from "axios"
-import FacebookLogin from "react-facebook-login"
 
 import { useFormInputValidation } from "react-form-input-validation"
 import { Link } from "react-router-dom"
 import { ToastContainer, toast } from "react-toastify"
 import { AccountService } from "../Services/Account.Service"
 import { useNavigate } from "react-router-dom"
+import publicContext from "../Services/Context.Service"
 
 import "react-toastify/dist/ReactToastify.css"
 import AuthLoader from "../Components/AuthLoader"
@@ -18,10 +18,8 @@ import { useEffect } from "react"
 
 const Signup = () => {
   const [isLoading, setIsLoading] = useState(false)
+  const { userisLogged, setUserIslogged } = useContext(publicContext)
   const navigate = useNavigate()
-  const responseFacebook = (response) => {
-    console.log(response)
-  }
 
   const notify = (message) => {
     toast(message)
@@ -38,8 +36,8 @@ const Signup = () => {
     {
       nom: "required",
       prenom: "required",
-      tel: "required",
-      email: "required|email",
+      tel: "required|numeric|digits_between:10,12",
+      email: "email",
       password: "required",
       passwordConfirm: "required",
     }
@@ -61,8 +59,12 @@ const Signup = () => {
         console.log(data)
         setIsLoading(false)
         notify("votre compte  a été créé avec succés")
-        AccountService.saveToken(data.data.token)
-        AccountService.SaveCurrentUserInfo(data.data.userId)
+        setTimeout(() => {
+          AccountService.saveToken(data.data.token)
+          AccountService.SaveCurrentUserInfo(data.data.userId)
+          console.log("salut token")
+          setUserIslogged(true)
+        }, 3000)
       })
       .catch((err) => {
         setIsLoading(false)
@@ -94,7 +96,8 @@ const Signup = () => {
     }
   }
   useEffect(() => {
-    AccountService.isLogged() && navigate("/home")
+    userisLogged && navigate("/home")
+    console.log(userisLogged)
   })
 
   return (
@@ -169,7 +172,7 @@ const Signup = () => {
                   onBlur={form.handleBlurEvent}
                   onChange={form.handleChangeEvent}
                   name="email"
-                  placeholder="Addresse email"
+                  placeholder="Addresse email (facultative)"
                 />
               </div>
             </div>
@@ -208,15 +211,9 @@ const Signup = () => {
 
             <div className="input-group numero">
               <button type="submit" className="login-btn-local">
-                {"S'²incrire "}
+                {"S'incrire "}
                 {isLoading ? <AuthLoader /> : ""}
               </button>
-              <span className="login-btn-google">
-                <FacebookLogin
-                  appId="1642328976201121"
-                  callback={responseFacebook}
-                />
-              </span>
 
               <ToastContainer />
               <span className="login-span">
