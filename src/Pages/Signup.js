@@ -172,7 +172,7 @@ const Signup = () => {
                   onBlur={form.handleBlurEvent}
                   onChange={form.handleChangeEvent}
                   name="email"
-                  placeholder="Addresse email (facultative)"
+                  placeholder="Adresse email (facultative)"
                 />
               </div>
             </div>
