@@ -11,20 +11,6 @@ const Home = () => {
   const { user } = useContext(publicContext)
   return (
     <div className="home">
-      <section className="banner">
-        {ShowSold ? (
-          <span>
-            <BiShowAlt />
-          </span>
-        ) : (
-          <>
-            <span> 0.00 CDF</span>
-            <span className="separator">|</span>
-            <span>0.00 USD </span>{" "}
-          </>
-        )}
-        <h4>Solde Total</h4>
-      </section>
       <section className="ekz-classique">
         <h1 className="section-title">
           {" "}

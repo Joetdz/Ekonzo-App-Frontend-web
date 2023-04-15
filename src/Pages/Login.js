@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react"
 import { CiUser } from "react-icons/ci"
 import { CiLock } from "react-icons/ci"
-import { FcGoogle } from "react-icons/fc"
+
 import { useFormInputValidation } from "react-form-input-validation"
 import { Link } from "react-router-dom"
 import { ToastContainer, toast } from "react-toastify"
@@ -119,12 +119,7 @@ const Login = () => {
           <button type="submit" className="login-btn-local">
             Connexion {isLoading ? <AuthLoader /> : ""}
           </button>
-          <button className="login-btn-google">
-            Se connecter avec
-            <span className="icon-connexion">
-              <FcGoogle />
-            </span>
-          </button>
+
           <ToastContainer />
           <span className="text-register">
             Si vous n avez pas un compte<Link to="/signup">inscrivez vous</Link>
