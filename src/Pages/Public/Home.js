@@ -10,17 +10,21 @@ import { useChallengeStore } from "../../stores/challenge.store"
 const Home = () => {
   const Challengeslist = useChallengeStore((state) => state.challenges)
   const getChallenges = useChallengeStore((state) => state.fetchChallenges)
-  console.log(Challengeslist)
+  console.log("hhh", Challengeslist)
   useEffect(() => {
     getChallenges()
-  }, [])
+  }, [getChallenges])
 
   return (
     <div className="home">
       <section className="ekz-classique">
         <h1 className="section-title"> Relevez un challenge</h1>
         <div className="cards-container">
-          <ChallengeCard image={"piyo.png"} prix={"2$"} />
+          {Challengeslist &&
+            Challengeslist.map((challenge) => (
+              <ChallengeCard image={challenge.image} prix={challenge.prix} />
+            ))}
+
           <div className="card">
             <div className="raka-raka"></div>
           </div>

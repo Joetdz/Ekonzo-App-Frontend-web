@@ -4,8 +4,10 @@ import { AccountService } from "../Services/Account.Service"
 
 export const useChallengeStore = create((set) => ({
   challenges: [],
+  isloading: false,
   fetchChallenges: async () => {
     console.log("token", AccountService.getToken())
+    set({ isloading: true })
 
     await axios({
       method: "get",
@@ -15,10 +17,11 @@ export const useChallengeStore = create((set) => ({
       },
     })
       .then((data) => {
-        set({ challenges: data })
+        set({ challenges: data.data.challenges, isloading: false })
       })
       .catch((err) => {
         console.log(err)
+        set({ isloading: false })
       })
   },
 }))

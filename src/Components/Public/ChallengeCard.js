@@ -6,7 +6,7 @@ const ChallengeCard = ({ image, prix, detail }) => {
       <img src={image} alt="" />
       <div className="detail-group">
         <div className="detail">En savoir plus</div>
-        <div className="prix">{prix}</div>
+        <div className="prix">{prix} $</div>
       </div>
     </div>
   )
