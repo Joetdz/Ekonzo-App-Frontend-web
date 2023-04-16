@@ -81,29 +81,7 @@ p {
             flex-direction: column;
             text-align: center;
 
-            .raka-raka,
-            .piyo,
-            .mopao {
-                height: 120px;
-                width: 165px;
-                background-image: url("../../public/Group5.png");
-                background-position: center;
-                background-repeat: no-repeat;
-                background-size: cover;
-                border-radius: 12px;
-            }
-
-            .piyo {
-
-                background-image: url("../../public/piyo.png");
-
-            }
-
-            .mopao {
-
-                background-image: url("../../public/Mopao.png");
-
-            }
+          
         }
     }
 
