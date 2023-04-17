@@ -1,22 +1,30 @@
-import React, { useContext } from "react"
-import { useState } from "react"
+import React, { useEffect } from "react"
+
 import { BiShowAlt, BiCustomize } from "react-icons/bi"
 import publicContext from "../../Services/Context.Service"
 import { FaCar, FaMotorcycle } from "react-icons/fa"
 import { GiPiggyBank, GiTeacher, GiClothes } from "react-icons/gi"
 import { FcHome, FcPhoneAndroid } from "react-icons/fc"
+import ChallengeCard from "../../Components/Public/ChallengeCard"
+import { useChallengeStore } from "../../stores/challenge.store"
 const Home = () => {
-  const [ShowSold, setShowSold] = useState(false)
+  const Challengeslist = useChallengeStore((state) => state.challenges)
+  const getChallenges = useChallengeStore((state) => state.fetchChallenges)
+  console.log("hhh", Challengeslist)
+  useEffect(() => {
+    getChallenges()
+  }, [getChallenges])
 
-  const { user } = useContext(publicContext)
   return (
     <div className="home">
       <section className="ekz-classique">
-        <h1 className="section-title">
-          {" "}
-          Epargnez avec des cartes au nombre des depots predefinit
-        </h1>
+        <h1 className="section-title"> Relevez un challenge</h1>
         <div className="cards-container">
+          {Challengeslist &&
+            Challengeslist.map((challenge) => (
+              <ChallengeCard image={challenge.image} prix={challenge.prix} />
+            ))}
+
           <div className="card">
             <div className="raka-raka"></div>
           </div>
@@ -29,9 +37,7 @@ const Home = () => {
         </div>
       </section>
       <section className="mayele-na-ekz">
-        <h1 className="section-title">
-          Epargnez pour un Objectif précis et suivez votre progression
-        </h1>
+        <h1 className="section-title">Commencez une cagnotte</h1>
         <div className="mayele-container">
           <div className="objectif">
             <span className="icon color-rose">

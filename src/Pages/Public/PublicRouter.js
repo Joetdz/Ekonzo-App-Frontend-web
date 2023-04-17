@@ -17,7 +17,6 @@ const PublicRouter = () => {
     axios
       .get(`${process.env.REACT_APP_BASE_URL}user/${userId}`)
       .then((userconnected) => {
-        console.log(userconnected.data[0])
         setUser(userconnected.data[0])
       })
       .catch((error) => {
@@ -26,7 +25,6 @@ const PublicRouter = () => {
   }
   useEffect(() => {
     getUserconnected(AccountService.getUserIdInLocalStorage())
-    console.log(user, "fff")
   }, [userisLogged])
   return (
     <publicContext.Provider

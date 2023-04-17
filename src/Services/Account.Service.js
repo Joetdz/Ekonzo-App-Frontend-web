@@ -18,8 +18,14 @@ const getUserIdInLocalStorage = () => {
   let userId = localStorage.getItem("userID")
   return userId
 }
+const getToken = () => {
+  let token = localStorage.getItem("token")
+  return token
+}
+
 export const AccountService = {
   saveToken,
+  getToken,
   logout,
   isLogged,
   SaveCurrentUserInfo,
