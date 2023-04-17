@@ -3,10 +3,12 @@
     
 
 .header {
+    display: none;
     background-color: $Primary-color;
     height: 12vh;
     color: $Tertiary-color;
     display: flex;
+    display: none;
     justify-content: space-between;
     align-items: center;
     padding: 2%;
