@@ -1,3 +1,7 @@
+
+@media  screen and (max-width:1400px){
+    
+
 .header {
     background-color: $Primary-color;
     height: 12vh;
@@ -73,4 +77,10 @@
             font-size: 24px;
         }
     }
+}}
+
+
+@media screen and (min-width:768px) {
+
+    
 }
