@@ -22,7 +22,14 @@ const Home = () => {
         <div className="cards-container">
           {Challengeslist &&
             Challengeslist.map((challenge) => (
-              <ChallengeCard image={challenge.image} prix={challenge.prix} />
+              <ChallengeCard
+                image={challenge.image}
+                prix={challenge.prix}
+                nom={challenge.nom}
+                key={challenge._id}
+                detail={challenge.description}
+                target={challenge.target}
+              />
             ))}
 
           <div className="card">
