@@ -81,7 +81,7 @@ p {
             flex-direction: column;
             text-align: center;
 
-          
+        
         }
     }
 
@@ -94,6 +94,7 @@ p {
     justify-content: space-between;
     gap: 2vh;
     padding-bottom: 2%;
+    m
 
     .no-card-section {
         flex-direction: column;
@@ -239,6 +240,11 @@ p {
                 flex-direction: column;
                 padding: 2% 0;
                 gap: 4%;
+
+                .num-input{
+                    display: flex;
+                    align-items: center;
+                }
 
             }
 

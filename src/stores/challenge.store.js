@@ -31,7 +31,29 @@ export const useChallengeStore = create(
 
       updateCurrentBuyChallengeCard: (answer) =>
         set({ currentBuyChallengeCard: answer }),
+      Cardbuyed: {},
+      postBuyCard: async (data) => {
+        console.log("token", AccountService.getToken())
+        set({ isloading: true })
+
+        await axios({
+          method: "post",
+          url: `${process.env.REACT_APP_BASE_URL}challenge/buy`,
+          headers: {
+            token: ` ${AccountService.getToken()}`,
+          },
+          data: data,
+        })
+          .then((data) => {
+            set({ Cardbuyed: data.data })
+          })
+          .catch((err) => {
+            console.log(err)
+            set({ isloading: false })
+          })
+      },
     }),
+
     {
       name: "challenge-storage", // unique name
       getStorage: () => sessionStorage, // (optional) by default the 'localStorage' is used
