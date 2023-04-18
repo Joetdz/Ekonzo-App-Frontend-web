@@ -31,7 +31,7 @@ export const useChallengeStore = create(
 
       updateCurrentBuyChallengeCard: (answer) =>
         set({ currentBuyChallengeCard: answer }),
-      Cardbuyed: {},
+      cardbuyed: {},
       postBuyCard: async (data) => {
         console.log("token", AccountService.getToken())
         set({ isloading: true })
@@ -45,11 +45,11 @@ export const useChallengeStore = create(
           data: data,
         })
           .then((data) => {
-            set({ Cardbuyed: data.data })
+            set({ cardbuyed: data.response })
           })
           .catch((err) => {
             console.log(err)
-            set({ isloading: false })
+            set({ isloading: false, cardbuyed: err.response.data })
           })
       },
     }),

@@ -4,6 +4,8 @@ import { useChallengeStore } from "../../stores/challenge.store"
 import { useFormInputValidation } from "react-form-input-validation"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import { AccountService } from "../../Services/Account.Service"
+import { useEffect } from "react"
 
 const BuyCard = () => {
   const notify = (message) => {
@@ -12,11 +14,13 @@ const BuyCard = () => {
   const challengeCard = useChallengeStore(
     (state) => state.currentBuyChallengeCard
   )
-  const card = useChallengeStore((state) => state.cardBayed)
+  const cardBuyStatus = useChallengeStore((state) => state.cardbuyed)
   const postBuyCard = useChallengeStore((state) => state.postBuyCard)
-  console.log(card, "ggdhdjjdjd cd")
+  console.log(cardBuyStatus, "ggdhdjjdjd cd")
+  const userId = AccountService.getUserIdInLocalStorage()
 
   const [data, setData] = useState({
+    id: userId,
     nom: challengeCard.nom,
     image: challengeCard.image,
     devise: "",
@@ -30,19 +34,34 @@ const BuyCard = () => {
   const [deviseSelected, setDeviseSelected] = useState([])
   const handleSubmit = (e) => {
     e.preventDefault()
-    const errors = []
-    function validatePhoneNumber(phoneNumber) {
+
+    const validatePhoneNumber = (phoneNumber) => {
       let regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
       let flag = regex.test(phoneNumber)
       if (flag) {
         console.log("Numéro de téléphone valide")
+        return true
       } else {
-        notify("Numéro de téléphone invalide")
+        return false
       }
     }
-    validatePhoneNumber("+243" + data.numero)
+    if (
+      data.nom === "" ||
+      data.image === "" ||
+      data.devise === "" ||
+      data.prix === "" ||
+      data.numero === "" ||
+      data.operateur === "" ||
+      data.target === "" ||
+      data.montant_depart === ""
+    ) {
+      notify("Veuillez remplier tous les champs")
+    } else if (validatePhoneNumber("+243" + data.numero) === false) {
+      notify("Numéro de téléphone invalide")
+    } else {
+      postBuyCard(data)
+    }
 
-    postBuyCard(data)
     console.log(data)
   }
   const onchange = (e) => {
@@ -68,6 +87,9 @@ const BuyCard = () => {
         "200.000 ",
       ])
     }
+    useEffect(() => {
+      notify(cardBuyStatus)
+    })
   }
   return (
     <div className="buy-card-page">
@@ -103,7 +125,7 @@ const BuyCard = () => {
               <option>selectionner...</option>
               <option value="MPESA">Mpesa</option>
               <option value="ORANGE">Orange money</option>
-              <option value="AIRETEL">Airtel money</option>
+              <option value="AIRTEL">Airtel money</option>
               <option value="AFRICEL">Afrimoney</option>
             </select>
           </div>
