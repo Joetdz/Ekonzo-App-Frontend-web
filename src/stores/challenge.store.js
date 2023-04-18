@@ -45,7 +45,7 @@ export const useChallengeStore = create(
           data: data,
         })
           .then((data) => {
-            set({ cardbuyed: data.response })
+            set({ isloading: false, cardbuyed: data })
           })
           .catch((err) => {
             console.log(err)

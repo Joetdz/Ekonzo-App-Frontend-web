@@ -1,17 +1,28 @@
-import React from "react"
+import React, { useEffect } from "react"
+
 import { Link } from "react-router-dom"
+import ChallengeCard from "../../Components/Public/ChallengeCard"
+import { useChallengeStore } from "../../stores/challenge.store"
+import CardSkeleton from "../../Components/Public/CardSkeleton"
 
 const NoCardPage = () => {
+  const Challengeslist = useChallengeStore((state) => state.challenges)
+  const getChallenges = useChallengeStore((state) => state.fetchChallenges)
+  console.log("hhh", Challengeslist)
+  useEffect(() => {
+    getChallenges()
+  }, [getChallenges])
+
   const navigate = (to) => {}
   return (
     <div className="no-card-page">
       <section className="no-card-section">
         <div className="illustration">
           <img src="rafiki.png" />
+          <p>
+            Oup's !<br /> Vous n’a pas de cartes d’epargne
+          </p>
         </div>
-        <p>
-          Oup's !<br /> Vous n’a pas de cartes d’epargne
-        </p>
       </section>
       <section className="buy-cards-section">
         <p className="explication">
@@ -19,21 +30,23 @@ const NoCardPage = () => {
           votre argent{" "}
         </p>
         <div className="cards-container">
-          <div className="card">
-            <Link to="/buy-card">
-              <div className="raka-raka"></div>
-              <span className="detail">commencez</span>
-            </Link>
-          </div>
-
-          <div className="card">
-            <div className="piyo"></div>
-            <span className="detail">commencez</span>
-          </div>
-          <div className="card">
-            <div className="mopao"></div>
-            <span className="detail">commencez</span>
-          </div>
+          {Challengeslist ? (
+            Challengeslist.map((challenge) => (
+              <ChallengeCard
+                image={challenge.image}
+                prix={challenge.prix}
+                nom={challenge.nom}
+                key={challenge._id}
+                detail={challenge.description}
+                target={challenge.target}
+              />
+            ))
+          ) : (
+            <>
+              {" "}
+              <CardSkeleton /> <CardSkeleton /> <CardSkeleton />
+            </>
+          )}
         </div>
       </section>
     </div>

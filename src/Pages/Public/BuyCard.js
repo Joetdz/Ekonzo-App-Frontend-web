@@ -6,6 +6,7 @@ import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { AccountService } from "../../Services/Account.Service"
 import { useEffect } from "react"
+import AuthLoader from "../../Components/AuthLoader"
 
 const BuyCard = () => {
   const notify = (message) => {
@@ -16,6 +17,8 @@ const BuyCard = () => {
   )
   const cardBuyStatus = useChallengeStore((state) => state.cardbuyed)
   const postBuyCard = useChallengeStore((state) => state.postBuyCard)
+  const isloading = useChallengeStore((state) => state.isloading)
+  console.log(isloading)
   console.log(cardBuyStatus, "ggdhdjjdjd cd")
   const userId = AccountService.getUserIdInLocalStorage()
 
@@ -137,7 +140,9 @@ const BuyCard = () => {
             </div>
           </div>
           <div className="btn">
-            <button>Commencez l'epargne</button>
+            <button>
+              Commencez le challenge {isloading ? <AuthLoader /> : ""}
+            </button>
           </div>
           <ToastContainer />
         </form>
