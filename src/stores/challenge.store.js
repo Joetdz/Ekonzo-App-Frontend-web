@@ -52,6 +52,28 @@ export const useChallengeStore = create(
             set({ isloading: false, cardbuyed: err.response.data })
           })
       },
+
+      userChallengeCards: [],
+      fetchUserChallengeCards: async () => {
+        set({ isloading: true })
+
+        await axios({
+          method: "get",
+          url: `${
+            process.env.REACT_APP_BASE_URL
+          }challenge/user-cards/${AccountService.getUserIdInLocalStorage()}`,
+          headers: {
+            token: ` ${AccountService.getToken()}`,
+          },
+        })
+          .then((data) => {
+            set({ userChallengeCards: data.data.challenges, isloading: false })
+          })
+          .catch((err) => {
+            console.log(err)
+            set({ isloading: false })
+          })
+      },
     }),
 
     {
