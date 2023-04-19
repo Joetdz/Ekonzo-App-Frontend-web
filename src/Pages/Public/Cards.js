@@ -18,7 +18,7 @@ const Cards = () => {
 
   return (
     <div className="cards-page">
-      {userChallengeCardsList ? (
+      {userChallengeCardsList.length !== 0 ? (
         <MycardList mychallengeList={userChallengeCardsList} />
       ) : (
         <NoCardPage />

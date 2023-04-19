@@ -64,7 +64,9 @@ const ChallengeCard = ({ image, prix, detail, nom, target }) => {
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             {detail}
           </Typography>
-          <Button onClick={add}>Acheter la carte</Button>
+          <Button className="btn" onClick={add}>
+            Acheter la carte
+          </Button>
         </Box>
       </Modal>
     </>

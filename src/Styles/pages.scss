@@ -2,11 +2,39 @@
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+   
+   
+    padding-bottom: 0px;
 
-    padding-bottom: 100px;
 
 
+}
+@media screen and (min-width:768px) {
 
+    .home,.cards-page,.buy-card-page,.no-found-page{
+        margin-left: 10%;
+    }
+
+    .buy-card-page{
+        display: flex;
+        
+        
+        .card{
+           width: 75%;
+        }
+        .card-detail-section{
+            display: flex;
+            width: 75%;
+            justify-content: center;
+            .form-buy-card{
+                
+
+                align-self: center;
+                width: 75%;
+            }
+
+        }
+    }
 }
 
 section {
@@ -253,7 +281,6 @@ p {
                 flex-direction: column;
                 padding: 2% 0;
                 gap: 4%;
-
                 .num-input{
                     display: flex;
                     align-items: center;
@@ -262,13 +289,17 @@ p {
             }
 
             input,
-            select {
+            select ,.num-input{
                 width: 100%;
                 height: 6vh;
                 border: rgba(80, 76, 76, 0.199) solid 1px;
                 background-color: $Tertiary-color;
                 border-radius: 12px;
                 padding: 2%;
+            }
+            input{
+                all:unset;
+                border: none;
             }
 
             label {
@@ -285,7 +316,7 @@ p {
                 font-weight: 600;
                 border-radius: 12px;
                 margin-top: 8px;
-                border: solid red 1px;
+              
                 
             }
 

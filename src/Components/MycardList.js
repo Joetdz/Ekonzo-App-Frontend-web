@@ -1,11 +1,12 @@
 import React from "react"
 import MyChallengeCard from "./MyChallengeCard"
+import NoCardPage from "./Public/NoCardPage"
 
 const MycardList = ({ mychallengeList }) => {
   return (
     <div className="card-page">
       <h5></h5>
-      {mychallengeList &&
+      {mychallengeList ? (
         mychallengeList.map((mychallenge, index) => (
           <MyChallengeCard
             image={mychallenge.image}
@@ -16,7 +17,10 @@ const MycardList = ({ mychallengeList }) => {
             key={mychallenge.image}
             index={index}
           />
-        ))}
+        ))
+      ) : (
+        <NoCardPage />
+      )}
     </div>
   )
 }
