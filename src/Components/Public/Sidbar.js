@@ -53,7 +53,7 @@ const Sidbar = () => {
             <span className="icon">
               <MdOutlinePayments />
             </span>
-            Historique
+            Cagnottes
           </Link>
         </div>{" "}
         <div className="group-home"></div>
