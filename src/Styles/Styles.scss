@@ -16,6 +16,8 @@ $Tertiary-color: #FFFFFF;
 body {
     height: auto;
     width: 100vw;
+    
+   overflow-x: hidden;
     background-color: $Tertiary-color;
     font-family: 'nunito', sans-serif;
 }

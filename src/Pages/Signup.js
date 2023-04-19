@@ -111,7 +111,6 @@ const Signup = () => {
         <div className="login-form">
           <form
             className="form"
-            noValidate
             autoComplete="off"
             onSubmit={onSubmit}
             lang="fr"
@@ -151,6 +150,7 @@ const Signup = () => {
                 className={errors.tel ? "input-detail errors" : "input-detail "}
               >
                 <BsTelephone />
+                +243
                 <input
                   type="tel"
                   onBlur={form.handleBlurEvent}

@@ -2,11 +2,39 @@
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+   
+   
+    padding-bottom: 0px;
 
-    padding-bottom: 100px;
 
 
+}
+@media screen and (min-width:768px) {
 
+    .home,.cards-page,.buy-card-page,.no-found-page{
+        margin-left: 10%;
+    }
+
+    .buy-card-page{
+        display: flex;
+        
+        
+        .card{
+           width: 75%;
+        }
+        .card-detail-section{
+            display: flex;
+            width: 75%;
+            justify-content: center;
+            .form-buy-card{
+                
+
+                align-self: center;
+                width: 75%;
+            }
+
+        }
+    }
 }
 
 section {
@@ -75,13 +103,25 @@ p {
         border-radius: 8px;
         overflow-y: scroll;
         gap: 2%;
+       .illustration{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        img{
+            width: 100px;
+            height: 100px;
+            flex: 30%;
+        }
+        
+       }
 
         .card {
             display: flex;
             flex-direction: column;
             text-align: center;
 
-          
+        
         }
     }
 
@@ -90,14 +130,16 @@ p {
 
 
 
-.no-card-page {
+.no-card-page{
     justify-content: space-between;
     gap: 2vh;
     padding-bottom: 2%;
+    
 
     .no-card-section {
         flex-direction: column;
-        padding: 8%;
+       
+     
 
         p {
             text-align: center;
@@ -188,17 +230,17 @@ p {
     padding: 0% 2%;
     padding-bottom: 100px;
 
-    .card-section {
-        height: 30vh;
+    .card {
+       
         border: solid 1px rgba(0, 0, 0, 0.089);
-        background-image: url("../../public/CARTE-BUY.png");
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
+      
         border-radius: 12px;
         color: $Tertiary-color;
         display: flex;
         flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2%;
 
 
 
@@ -239,17 +281,25 @@ p {
                 flex-direction: column;
                 padding: 2% 0;
                 gap: 4%;
+                .num-input{
+                    display: flex;
+                    align-items: center;
+                }
 
             }
 
             input,
-            select {
+            select ,.num-input{
                 width: 100%;
                 height: 6vh;
                 border: rgba(80, 76, 76, 0.199) solid 1px;
                 background-color: $Tertiary-color;
                 border-radius: 12px;
                 padding: 2%;
+            }
+            input{
+                all:unset;
+                border: none;
             }
 
             label {
@@ -266,6 +316,8 @@ p {
                 font-weight: 600;
                 border-radius: 12px;
                 margin-top: 8px;
+              
+                
             }
 
             button {

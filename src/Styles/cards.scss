@@ -21,4 +21,21 @@
         }
         
     }
+   
+}
+
+.btn {
+    display: flex;
+    all: unset;
+    cursor: pointer;
+     background-color: $Primary-color;
+    width: 100%;
+    border-radius: 8px;
+    height: 5vh;
+    text-align: center;
+    color: $Tertiary-color;
+    justify-content: center;
+    align-items: center;
+
+    
 }

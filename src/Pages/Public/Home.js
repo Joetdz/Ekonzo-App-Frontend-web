@@ -7,6 +7,7 @@ import { GiPiggyBank, GiTeacher, GiClothes } from "react-icons/gi"
 import { FcHome, FcPhoneAndroid } from "react-icons/fc"
 import ChallengeCard from "../../Components/Public/ChallengeCard"
 import { useChallengeStore } from "../../stores/challenge.store"
+import CardSkeleton from "../../Components/Public/CardSkeleton"
 const Home = () => {
   const Challengeslist = useChallengeStore((state) => state.challenges)
   const getChallenges = useChallengeStore((state) => state.fetchChallenges)
@@ -20,7 +21,7 @@ const Home = () => {
       <section className="ekz-classique">
         <h1 className="section-title"> Relevez un challenge</h1>
         <div className="cards-container">
-          {Challengeslist &&
+          {Challengeslist ? (
             Challengeslist.map((challenge) => (
               <ChallengeCard
                 image={challenge.image}
@@ -30,7 +31,13 @@ const Home = () => {
                 detail={challenge.description}
                 target={challenge.target}
               />
-            ))}
+            ))
+          ) : (
+            <>
+              {" "}
+              <CardSkeleton /> <CardSkeleton /> <CardSkeleton />
+            </>
+          )}
 
           <div className="card">
             <div className="raka-raka"></div>

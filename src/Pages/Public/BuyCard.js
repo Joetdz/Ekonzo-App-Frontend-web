@@ -4,6 +4,9 @@ import { useChallengeStore } from "../../stores/challenge.store"
 import { useFormInputValidation } from "react-form-input-validation"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import { AccountService } from "../../Services/Account.Service"
+import { useEffect } from "react"
+import AuthLoader from "../../Components/AuthLoader"
 
 const BuyCard = () => {
   const notify = (message) => {
@@ -12,172 +15,141 @@ const BuyCard = () => {
   const challengeCard = useChallengeStore(
     (state) => state.currentBuyChallengeCard
   )
-
-  const [fields, errors, form] = useFormInputValidation(
-    {
-      nom: "",
-      image: "",
-      devise: "",
-      prix: "",
-      numero: "",
-      operateur: "",
-      target: "",
-      montant_depart: "",
-    },
-    {
-      nom: "required",
-      image: "required",
-      devise: "required",
-      prix: "required",
-      numero: "required|numeric|digits_between:10,12",
-      operateur: "required",
-      target: "required",
-      montant_depart: "required",
-    }
+  const cardBuyStatus = useChallengeStore((state) => state.cardbuyed)
+  const resetCardBuyStatus = useChallengeStore(
+    (state) => state.resetCardBuyStatus
   )
-  const onSubmit = async (event) => {
-    event.preventDefault()
+  const postBuyCard = useChallengeStore((state) => state.postBuyCard)
+  const isloading = useChallengeStore((state) => state.isloading)
+  console.log(isloading)
+  console.log(cardBuyStatus, "ggdhdjjdjd cd")
+  const userId = AccountService.getUserIdInLocalStorage()
 
-    const isValid = await form.validate(event)
-    if (isValid) {
-      console.log(fields)
+  const [data, setData] = useState({
+    id: userId,
+    nom: challengeCard.nom,
+    image: challengeCard.image,
+    devise: "",
+    prix: challengeCard.prix,
+    numero: "",
+    operateur: "",
+    target: challengeCard.target,
+    montant_depart: "",
+  })
 
-      console.log("ok", fields, "erro", errors)
-    } else {
-      console.log(errors)
-      notify("Vueillez renseigner correctement tous les champs", errors)
+  const [deviseSelected, setDeviseSelected] = useState([])
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    const validatePhoneNumber = (phoneNumber) => {
+      let regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
+      let flag = regex.test(phoneNumber)
+      if (flag) {
+        console.log("Numéro de téléphone valide")
+        return true
+      } else {
+        return false
+      }
     }
-  }
+    if (
+      data.nom === "" ||
+      data.image === "" ||
+      data.devise === "" ||
+      data.prix === "" ||
+      data.numero === "" ||
+      data.operateur === "" ||
+      data.target === "" ||
+      data.montant_depart === ""
+    ) {
+      notify("Veuillez remplier tous les champs")
+    } else if (validatePhoneNumber("+243" + data.numero) === false) {
+      notify("Numéro de téléphone invalide")
+    } else {
+      postBuyCard(data)
+    }
 
-  const [deviseSelected, setDeviseSelected] = useState([
-    "2.500 CDF",
-    "5.000 CDF",
-    "10.000 CDF",
-    "25.000 CDF",
-    "50.000 CDF",
-    "100.000 CDF",
-    "200.000 CDF",
-  ])
+    console.log(data)
+  }
   const onchange = (e) => {
     const devise = e.target.value
+    const name = e.target.name
+    const value = e.target.value
+
+    setData((prev) => {
+      return { ...prev, [name]: value }
+    })
+
+    console.log(e.target.value)
     if (devise === "USD") {
-      setDeviseSelected([
-        "1 USD",
-        "2 USD",
-        "5 USD",
-        "10 USD",
-        "25 USD",
-        "50 USD",
-        "100 USD",
-      ])
+      setDeviseSelected(["1 ", "2 ", "5 ", "10 ", "25 ", "50 ", "100 "])
     } else if (devise === "CDF") {
       setDeviseSelected([
-        "2.500 CDF",
-        "5.000 CDF",
-        "10.000 CDF",
-        "25.000 CDF",
-        "50.000 CDF",
-        "100.000 CDF",
-        "200.000 CDF",
+        "2.500 ",
+        "5.000 ",
+        "10.000 ",
+        "25.000 ",
+        "50.000 ",
+        "100.000 ",
+        "200.000 ",
       ])
     }
   }
+  useEffect(() => {
+    if (cardBuyStatus) {
+      notify(cardBuyStatus)
+      resetCardBuyStatus()
+    }
+  }, [cardBuyStatus])
+
   return (
     <div className="buy-card-page">
       <div className="card">
         <img src={challengeCard.image} alt="" />
       </div>
       <section className="card-detail-section">
-        <form
-          className="form-buy-card"
-          noValidate
-          autoComplete="off"
-          onSubmit={onSubmit}
-          lang="fr"
-        >
+        <form className="form-buy-card" onSubmit={handleSubmit}>
           <div className="group-input">
             <label htmlFor="sel"> Dévise</label>
-            <select
-              name="devise"
-              id="sel"
-              onChange={onchange}
-              onBlur={form.handleBlurEvent}
-            >
-              <option defaultValue disabled>
-                Seletionner...
-              </option>
-              <option value="CDF">Francs congolais</option>
+            <select name="devise" id="sel" onChange={onchange}>
+              <option>Seletionner...</option>
+
               <option value="USD">Dollars Américain</option>
             </select>
           </div>
           <div className="group-input">
             <label htmlFor="mtn">Montant de Départ</label>
-            <select
-              id="mtn"
-              name="montant_depart"
-              onBlur={form.handleBlurEvent}
-              onChange={form.handleChangeEvent}
-            >
-              <option defaultValue disabled>
-                Seletionner...
-              </option>
+            <select id="mtn" name="montant_depart" onChange={onchange}>
+              <option>selectionner...</option>
               {deviseSelected.map((montant) => (
-                <option
-                  value={montant}
-                  name="montant_depart"
-                  onBlur={form.handleBlurEvent}
-                  onChange={form.handleChangeEvent}
-                >
+                <option value={montant} name="montant_depart">
                   {montant}
                 </option>
               ))}
             </select>
-
-            <input
-              type="text"
-              name="target"
-              value={challengeCard.target}
-              onBlur={form.handleBlurEvent}
-              onChange={form.handleChangeEvent}
-            />
-
-            <input
-              type="hidden"
-              name="nom"
-              value={challengeCard.nom}
-              onBlur={form.handleBlurEvent}
-              onChange={form.handleChangeEvent}
-            />
-
-            <input
-              type="hidden"
-              name="nom"
-              value={challengeCard.image}
-              onBlur={form.handleBlurEvent}
-              onChange={form.handleChangeEvent}
-            />
           </div>
 
           <div className="group-input">
             <label htmlFor="sel">Méthode de paiement</label>
-            <select
-              name="operateur"
-              id="sel"
-              onBlur={form.handleBlurEvent}
-              onChange={form.handleChangeEvent}
-            >
-              <option value="journalière">Mpesa</option>
-              <option value="hebomadaire">Orange money</option>
-              <option value="Mensuelle">Airtel money</option>
-              <option value="Mensuelle">Afrimoney</option>
+            <select name="operateur" id="sel" onChange={onchange}>
+              {" "}
+              <option>selectionner...</option>
+              <option value="MPESA">Mpesa</option>
+              <option value="ORANGE">Orange money</option>
+              <option value="AIRTEL">Airtel money</option>
+              <option value="AFRICEL">Afrimoney</option>
             </select>
           </div>
           <div className="group-input">
-            <label htmlFor="sel">Méthode de paiement</label>
-            +243 <input type="tel" name="numero" />
+            <label htmlFor="sel">numéro</label>
+            <div className="num-input">
+              {" "}
+              +243 <input type="tel" name="numero" onChange={onchange} />
+            </div>
           </div>
           <div className="btn">
-            <button>Commencez l'epargne</button>
+            <button className="login-btn-local">
+              Commencez le challenge {isloading ? <AuthLoader /> : ""}
+            </button>
           </div>
           <ToastContainer />
         </form>
