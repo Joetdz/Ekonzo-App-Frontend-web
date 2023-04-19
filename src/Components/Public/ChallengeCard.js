@@ -1,6 +1,6 @@
 import React from "react"
 import Box from "@mui/material/Box"
-import Button from "@mui/material/Button"
+
 import Typography from "@mui/material/Typography"
 import Modal from "@mui/material/Modal"
 import { useChallengeStore } from "../../stores/challenge.store"
@@ -15,6 +15,7 @@ const style = {
   bgcolor: "background.paper",
   borderRadius: "12px",
   boxShadow: 24,
+
   p: 4,
 }
 
@@ -58,15 +59,15 @@ const ChallengeCard = ({ image, prix, detail, nom, target }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography id="modal-modal-title" variant="h4" component="h2">
             {nom}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             {detail}
           </Typography>
-          <Button className="btn" onClick={add}>
+          <button className="btn" onClick={add}>
             Acheter la carte
-          </Button>
+          </button>
         </Box>
       </Modal>
     </>

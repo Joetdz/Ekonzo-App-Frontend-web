@@ -200,7 +200,7 @@
         display: grid;
         grid-template-columns: 50% 50%;
         align-items: center;
-        padding: 4%;
+        padding: 5%;
         gap: 3%;
 
 
@@ -219,20 +219,29 @@
 
 
 
+            .illustraton {
+
+
+                width: 20vw;
+                height: 50%;
+   
+   
+   
+            }
         }
 
         .login-form {
             height: 75vh;
             justify-content: center;
 
-
-
+          
+           
             .form {
 
                 margin-top: 0x;
                 gap: 24px;
 
-                height: 40vh;
+                height: 50vh;
 
                 .input-group {
                     height: 8vh;
@@ -276,17 +285,16 @@
 
         .illustraton {
 
-
             width: 20vw;
-            height: 50%;
+            height: 30%;
 
 
 
         }
 
         .logo {
-            width: 30vw;
-
+            width: 15vw;
+          
 
         }
     }

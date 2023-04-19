@@ -113,9 +113,42 @@
     padding: 2%;
     background-color: $Primary-color;
     margin-right:10% ;
+    color: white;
 
 
+    .logo {
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+        background-image: url("../../public/logo-no-background.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
 
+    }
+
+    .navigation{
+cursor: pointer;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+gap:1.5rem
+
+    }
+
+ .notif {
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    cursor: pointer;
+    :hover { 
+        color: aliceblue;
+        box-shadow: 6px 12px 10px rgba(0,0,0,0.2); transform: scale(1,1); }
+
+}
 
     a {
         all: unset;
@@ -123,19 +156,24 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
     }
 
     .group-home {
         display: flex;
         flex-direction: column;
+        justify-content: center;
         align-items: center;
         font-size: 10x;
-        color: rgba(19, 11, 11, 0.658);
+        color:rgba(255, 255, 255, 0.733);
+        
 
         .icon {
             font-size: 24px;
-        }
-    }
+        }:hover { 
+            color: aliceblue;
+            box-shadow: 6px 12px 10px rgba(0,0,0,0.2); transform: scale(1,1); }
+    } 
             
         }
     }
