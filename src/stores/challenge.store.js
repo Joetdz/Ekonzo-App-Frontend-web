@@ -31,7 +31,10 @@ export const useChallengeStore = create(
 
       updateCurrentBuyChallengeCard: (answer) =>
         set({ currentBuyChallengeCard: answer }),
-      cardbuyed: {},
+      cardbuyed: "",
+      resetCardBuyStatus: () => {
+        set({ cardbuyed: "" })
+      },
       postBuyCard: async (data) => {
         console.log("token", AccountService.getToken())
         set({ isloading: true })
@@ -53,7 +56,10 @@ export const useChallengeStore = create(
           })
       },
 
-      depositCardchanlenge: {},
+      depositCardchanllenge: "",
+      resetDepositStatus: () => {
+        set({ depositCardchanllenge: "" })
+      },
       postDeposit: async (data) => {
         console.log("token", AccountService.getToken())
         set({ isloading: true })
@@ -67,11 +73,12 @@ export const useChallengeStore = create(
           data: data,
         })
           .then((data) => {
-            set({ isloading: false, depositCardchanlenge: data })
+            console.log("reszzz", data)
+            set({ isloading: false, depositCardchanllenge: data.data.messages })
           })
           .catch((err) => {
             console.log(err)
-            set({ isloading: false, depositCardchanlenge: err.response.data })
+            set({ isloading: false, depositCardchanllenge: err.response.data })
           })
       },
 

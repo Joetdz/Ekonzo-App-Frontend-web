@@ -1,6 +1,6 @@
 import React from "react"
 import Box from "@mui/material/Box"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { ToastContainer, toast } from "react-toastify"
 import Typography from "@mui/material/Typography"
 import Modal from "@mui/material/Modal"
@@ -31,10 +31,16 @@ const MyChallengeCard = ({
   target,
   index,
 }) => {
-  const depositstatus = useChallengeStore((state) => state.depositCardchanlenge)
+  const amoutNextDeposit = montant_depart * progress
+  const depositstatus = useChallengeStore(
+    (state) => state.depositCardchanllenge
+  )
   const postDeposit = useChallengeStore((state) => state.postDeposit)
+  const resetDepositStatus = useChallengeStore(
+    (state) => state.resetDepositStatus
+  )
   const isloading = useChallengeStore((state) => state.isloading)
-  console.log("ldd", depositstatus)
+  console.log("ldd", depositstatus, index)
   console.log(isloading)
   const [open, setOpen] = React.useState(false)
   const handleOpen = () => setOpen(true)
@@ -49,6 +55,7 @@ const MyChallengeCard = ({
     devise: "USD",
     numero: "",
     operateur: "",
+    target: target,
   })
 
   const onchange = (e) => {
@@ -90,6 +97,13 @@ const MyChallengeCard = ({
     }
   }
 
+  useEffect(() => {
+    if (depositstatus) {
+      notify(depositstatus)
+      resetDepositStatus()
+    }
+  }, [depositstatus])
+
   return (
     <>
       <div className="card-container">
@@ -97,12 +111,12 @@ const MyChallengeCard = ({
           <img src={image} alt="" />
         </div>
         <div className="details">
-          <h2>Details</h2>
+          <h2>Détails</h2>
           <span className="progess">
-            Progrssion :{progress}/{target}
+            Progression : {progress}/{target}
           </span>
-          <span className="solde">Montant de depart: {montant_depart}</span>
-          <span className="solde">Sold: {solde}USD</span>
+          <span className="solde">Montant de départ: {montant_depart} USD</span>
+          <span className="solde">Solde: {solde} USD</span>
         </div>
         <div className="buttons">
           <div>
@@ -129,7 +143,7 @@ const MyChallengeCard = ({
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             {" "}
-            Montant:{index} USD
+            Montant:{amoutNextDeposit} USD
           </Typography>
           <div className="modal-deposit">
             <section className="card-detail-section">

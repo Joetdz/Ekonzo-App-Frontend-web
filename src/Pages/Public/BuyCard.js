@@ -16,6 +16,9 @@ const BuyCard = () => {
     (state) => state.currentBuyChallengeCard
   )
   const cardBuyStatus = useChallengeStore((state) => state.cardbuyed)
+  const resetCardBuyStatus = useChallengeStore(
+    (state) => state.resetCardBuyStatus
+  )
   const postBuyCard = useChallengeStore((state) => state.postBuyCard)
   const isloading = useChallengeStore((state) => state.isloading)
   console.log(isloading)
@@ -92,7 +95,10 @@ const BuyCard = () => {
     }
   }
   useEffect(() => {
-    notify(cardBuyStatus)
+    if (cardBuyStatus) {
+      notify(cardBuyStatus)
+      resetCardBuyStatus()
+    }
   }, [cardBuyStatus])
 
   return (
