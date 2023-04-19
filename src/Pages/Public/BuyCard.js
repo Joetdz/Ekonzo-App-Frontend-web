@@ -90,10 +90,11 @@ const BuyCard = () => {
         "200.000 ",
       ])
     }
-    useEffect(() => {
-      notify(cardBuyStatus)
-    })
   }
+  useEffect(() => {
+    notify(cardBuyStatus)
+  }, [cardBuyStatus])
+
   return (
     <div className="buy-card-page">
       <div className="card">
@@ -140,7 +141,7 @@ const BuyCard = () => {
             </div>
           </div>
           <div className="btn">
-            <button>
+            <button className="login-btn-local">
               Commencez le challenge {isloading ? <AuthLoader /> : ""}
             </button>
           </div>

@@ -45,11 +45,33 @@ export const useChallengeStore = create(
           data: data,
         })
           .then((data) => {
-            set({ isloading: false, cardbuyed: data })
+            set({ isloading: false, cardbuyed: data.data.messages })
           })
           .catch((err) => {
             console.log(err)
             set({ isloading: false, cardbuyed: err.response.data })
+          })
+      },
+
+      depositCardchanlenge: {},
+      postDeposit: async (data) => {
+        console.log("token", AccountService.getToken())
+        set({ isloading: true })
+
+        await axios({
+          method: "post",
+          url: `${process.env.REACT_APP_BASE_URL}challenge/deposit`,
+          headers: {
+            token: ` ${AccountService.getToken()}`,
+          },
+          data: data,
+        })
+          .then((data) => {
+            set({ isloading: false, depositCardchanlenge: data })
+          })
+          .catch((err) => {
+            console.log(err)
+            set({ isloading: false, depositCardchanlenge: err.response.data })
           })
       },
 
