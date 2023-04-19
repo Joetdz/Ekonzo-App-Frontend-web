@@ -114,7 +114,16 @@
     background-color: $Primary-color;
     margin-right:10% ;
     color: white;
+    .logo {
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+        background-image: url("../../public/logo-no-background.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
 
+    }
 
 
 
