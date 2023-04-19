@@ -56,14 +56,7 @@ const Sidbar = () => {
             Historique
           </Link>
         </div>{" "}
-        <div className="group-home">
-          <Link to="/setting">
-            <span className="icon">
-              <GrUserSettings />
-            </span>
-            options
-          </Link>
-        </div>
+        <div className="group-home"></div>
       </div>
       <div className="notif">
         <CgLogOut onClick={logout} />
