@@ -25,7 +25,7 @@ const Footer = () => {
         </Link>
       </div>{" "}
       <div className="group-home">
-        <Link to="/history">
+        <Link to="/my-cagnottes">
           <span className="icon">
             <MdOutlinePayments />
           </span>

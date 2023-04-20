@@ -10,6 +10,7 @@ import Cards from "./Cards"
 import BuyCard from "./BuyCard"
 import publicContext from "../../Services/Context.Service"
 import { AccountService } from "../../Services/Account.Service"
+import Cagnottes from "./Cagnottes"
 const PublicRouter = () => {
   const [user, setUser] = useState()
   const [userisLogged, setUserIslogged] = useState(AccountService.isLogged())
@@ -37,6 +38,7 @@ const PublicRouter = () => {
           <Route path="*" element={<Errors />} />
           <Route path="/cards" element={<Cards />} />
           <Route path="/buy-card" element={<BuyCard />} />
+          <Route path="/my-cagnottes" element={<Cagnottes />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
