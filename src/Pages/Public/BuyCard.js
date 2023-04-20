@@ -137,7 +137,7 @@ const BuyCard = () => {
             </select>
           </div>
           <div className="group-input">
-            <label htmlFor="sel">numéro</label>
+            <label htmlFor="sel">Numéro</label>
             <div className="num-input">
               {" "}
               +243 <input type="tel" name="numero" onChange={onchange} />
@@ -145,7 +145,7 @@ const BuyCard = () => {
           </div>
           <div className="btn">
             <button className="login-btn-local">
-              Payer la catre {isloading ? <AuthLoader /> : ""}
+              Payer la carte {isloading ? <AuthLoader /> : ""}
             </button>
           </div>
           <ToastContainer />
