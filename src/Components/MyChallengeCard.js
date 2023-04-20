@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography"
 import Modal from "@mui/material/Modal"
 import { AccountService } from "../Services/Account.Service"
 import { useChallengeStore } from "../stores/challenge.store"
+import AuthLoader from "./AuthLoader"
 
 const style = {
   position: "absolute",
@@ -101,6 +102,9 @@ const MyChallengeCard = ({
     if (depositstatus) {
       notify(depositstatus)
       resetDepositStatus()
+      setTimeout(function () {
+        handleClose()
+      }, 5000)
     }
   }, [depositstatus])
 
@@ -168,9 +172,14 @@ const MyChallengeCard = ({
                 </div>
                 <div className="btn">
                   <button className="login-btn-local">
-                    Commencez le challenge{" "}
+                    {isloading ? <AuthLoader /> : "confirmez"}
                   </button>
                 </div>
+                <span className="nota-bene">
+                  {
+                    "Nb: Nous sommes en mode test, donc lorsque vous recevrez la demande de paiment sur votre telephone, veuillez l' annuler et ici la transaction sera considerée comme effecutée avec succès"
+                  }
+                </span>
               </form>
             </section>
           </div>
