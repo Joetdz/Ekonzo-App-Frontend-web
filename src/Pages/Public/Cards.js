@@ -18,6 +18,7 @@ const Cards = () => {
 
   return (
     <div className="cards-page">
+      <h1 className="section-title">Mes cartes challenges</h1>
       {userChallengeCardsList.length !== 0 ? (
         <MycardList mychallengeList={userChallengeCardsList} />
       ) : (

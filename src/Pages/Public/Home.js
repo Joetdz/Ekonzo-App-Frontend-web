@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import Box from "@mui/material/Box"
-
+import { useNavigate, Link } from "react-router-dom"
 import Typography from "@mui/material/Typography"
 import Modal from "@mui/material/Modal"
 
@@ -143,6 +143,12 @@ const Home = () => {
               Ce système de cagnotte personnalisé vous permet de déposer des
               montants réguliers et de gérer leurs dépenses
             </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              Pour l'instant profifez des cartes challenges
+            </Typography>
+            <Link to="/cards">
+              <button className="btn">Voir mes challenges</button>
+            </Link>
           </Box>
         </Modal>
       </div>

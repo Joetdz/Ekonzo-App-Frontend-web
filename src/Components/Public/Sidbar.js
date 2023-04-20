@@ -10,6 +10,7 @@ import { TbHome } from "react-icons/tb"
 import { BsCardChecklist } from "react-icons/bs"
 import { MdOutlinePayments } from "react-icons/md"
 import { GrUserSettings } from "react-icons/gr"
+import { RiUserSettingsLine } from "react-icons/ri"
 
 const Sidbar = () => {
   const { user, userisLogged, setUserIslogged } = useContext(publicContext)
@@ -54,6 +55,14 @@ const Sidbar = () => {
               <MdOutlinePayments />
             </span>
             Mes cagnottes
+          </Link>
+        </div>{" "}
+        <div className="group-home">
+          <Link to="/about">
+            <span className="icon">
+              <RiUserSettingsLine />
+            </span>
+            A propos
           </Link>
         </div>{" "}
         <div className="group-home"></div>
