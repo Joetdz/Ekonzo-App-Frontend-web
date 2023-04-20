@@ -33,11 +33,11 @@ const Footer = () => {
         </Link>
       </div>{" "}
       <div className="group-home">
-        <Link to="/setting">
+        <Link to="/about">
           <span className="icon">
             <GrUserSettings />
           </span>
-          options
+          A propos
         </Link>
       </div>
     </div>
