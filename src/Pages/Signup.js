@@ -36,7 +36,7 @@ const Signup = () => {
     {
       nom: "required",
       prenom: "required",
-      tel: "required|numeric|digits_between:10,12",
+      tel: "required|numeric|digits_between:9,12",
       email: "email",
       password: "required",
       passwordConfirm: "required",
