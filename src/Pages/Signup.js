@@ -211,7 +211,7 @@ const Signup = () => {
 
             <div className="input-group numero">
               <button type="submit" className="login-btn-local">
-                {"S'incrire "}
+                {"S'inscrire "}
                 {isLoading ? <AuthLoader /> : ""}
               </button>
 
