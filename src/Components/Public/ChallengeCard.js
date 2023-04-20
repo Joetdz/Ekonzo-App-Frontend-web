@@ -46,7 +46,7 @@ const ChallengeCard = ({ image, prix, detail, nom, target }) => {
         <img src={image} alt="" onClick={handleOpen} />
         <div className="detail-group">
           <div className="detail" onClick={handleOpen}>
-            {prix && "En savoir plus "}
+            {prix && "Commencez le challenge "}
           </div>
           <div className="prix">{prix} $</div>
         </div>
@@ -65,7 +65,7 @@ const ChallengeCard = ({ image, prix, detail, nom, target }) => {
             {detail}
           </Typography>
           <button className="btn" onClick={add}>
-            Acheter la carte
+            Achetez la carte
           </button>
         </Box>
       </Modal>
