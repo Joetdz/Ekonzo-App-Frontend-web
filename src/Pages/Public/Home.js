@@ -30,7 +30,7 @@ const Home = () => {
   const handleClose = () => setOpen(false)
   const Challengeslist = useChallengeStore((state) => state.challenges)
   const getChallenges = useChallengeStore((state) => state.fetchChallenges)
-  console.log("hhh", Challengeslist)
+
   useEffect(() => {
     getChallenges()
   }, [getChallenges])
