@@ -9,7 +9,6 @@ export const useChallengeStore = create(
       challenges: [],
       isloading: false,
       fetchChallenges: async () => {
-        console.log("token", AccountService.getToken())
         set({ isloading: true })
 
         await axios({
@@ -36,7 +35,6 @@ export const useChallengeStore = create(
         set({ cardbuyed: "" })
       },
       postBuyCard: async (data) => {
-        console.log("token", AccountService.getToken())
         set({ isloading: true })
 
         await axios({
@@ -61,7 +59,6 @@ export const useChallengeStore = create(
         set({ depositCardchanllenge: "" })
       },
       postDeposit: async (data) => {
-        console.log("token", AccountService.getToken())
         set({ isloading: true })
 
         await axios({
@@ -73,7 +70,6 @@ export const useChallengeStore = create(
           data: data,
         })
           .then((data) => {
-            console.log("reszzz", data)
             set({ isloading: false, depositCardchanllenge: data.data.messages })
           })
           .catch((err) => {

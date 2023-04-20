@@ -21,8 +21,7 @@ const BuyCard = () => {
   )
   const postBuyCard = useChallengeStore((state) => state.postBuyCard)
   const isloading = useChallengeStore((state) => state.isloading)
-  console.log(isloading)
-  console.log(cardBuyStatus, "ggdhdjjdjd cd")
+
   const userId = AccountService.getUserIdInLocalStorage()
 
   const [data, setData] = useState({
@@ -45,7 +44,6 @@ const BuyCard = () => {
       let regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
       let flag = regex.test(phoneNumber)
       if (flag) {
-        console.log("Numéro de téléphone valide")
         return true
       } else {
         return false
@@ -64,11 +62,11 @@ const BuyCard = () => {
       notify("Veuillez remplier tous les champs")
     } else if (validatePhoneNumber("+243" + data.numero) === false) {
       notify("Numéro de téléphone invalide")
+    } else if (isloading === true) {
+      notify("Vueilliez patienter")
     } else {
       postBuyCard(data)
     }
-
-    console.log(data)
   }
   const onchange = (e) => {
     const devise = e.target.value
@@ -79,7 +77,6 @@ const BuyCard = () => {
       return { ...prev, [name]: value }
     })
 
-    console.log(e.target.value)
     if (devise === "USD") {
       setDeviseSelected(["1 ", "2 ", "5 ", "10 ", "25 ", "50 ", "100 "])
     } else if (devise === "CDF") {
@@ -148,7 +145,7 @@ const BuyCard = () => {
           </div>
           <div className="btn">
             <button className="login-btn-local">
-              Commencez le challenge {isloading ? <AuthLoader /> : ""}
+              Payer la catre {isloading ? <AuthLoader /> : ""}
             </button>
           </div>
           <ToastContainer />

@@ -45,15 +45,15 @@ const Sidbar = () => {
             <span className="icon">
               <BsCardChecklist />
             </span>
-            Challenges
+            Mes challenges
           </Link>
         </div>{" "}
         <div className="group-home">
-          <Link to="/history">
+          <Link to="/my-cagnottes">
             <span className="icon">
               <MdOutlinePayments />
             </span>
-            Cagnottes
+            Mes cagnottes
           </Link>
         </div>{" "}
         <div className="group-home"></div>

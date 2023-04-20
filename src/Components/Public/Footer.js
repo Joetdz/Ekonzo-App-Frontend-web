@@ -21,15 +21,15 @@ const Footer = () => {
           <span className="icon">
             <BsCardChecklist />
           </span>
-          Mes éparnes
+          Mes Challenges
         </Link>
       </div>{" "}
       <div className="group-home">
-        <Link to="/history">
+        <Link to="/my-cagnottes">
           <span className="icon">
             <MdOutlinePayments />
           </span>
-          Historique
+          Mes Cagnottes
         </Link>
       </div>{" "}
       <div className="group-home">

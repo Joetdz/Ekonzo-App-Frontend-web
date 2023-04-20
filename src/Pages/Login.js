@@ -31,7 +31,6 @@ const Login = () => {
       data: credentials,
     })
       .then((data) => {
-        console.log(data)
         setIsLoading(false)
         notify("Connexion Réusie !")
         setTimeout(() => {
@@ -56,7 +55,7 @@ const Login = () => {
       password: "",
     },
     {
-      numero: "required",
+      numero: "required|numeric|digits_between:9,12",
 
       password: "required",
     }
@@ -65,16 +64,15 @@ const Login = () => {
     event.preventDefault()
     const isValid = await form.validate(event)
     if (isValid) {
-      console.log(fields, errors)
       login(fields)
-    } else {
-      console.log(errors)
+    } else if (errors) {
       notify("Vueillez renseigner correctement tous les champs")
+    } else if (errors.numero) {
+      notify("Vueillez renseigner un numéro valide")
     }
   }
   useEffect(() => {
     userisLogged && navigate("/home")
-    console.log(userisLogged)
   })
 
   return (
@@ -95,6 +93,7 @@ const Login = () => {
           <div className={errors.name ? "input-group errors" : "input-group "}>
             {" "}
             <CiUser />
+            +243
             <input
               name="numero"
               onBlur={form.handleBlurEvent}

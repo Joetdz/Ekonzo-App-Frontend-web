@@ -31,23 +31,22 @@ const ChallengeCard = ({ image, prix, detail, nom, target }) => {
   const setcurrentBuyChallengeCard = useChallengeStore(
     (state) => state.updateCurrentBuyChallengeCard
   )
-  console.log("ggg", currentBuyChallengeCard)
   const currentCard = { image, nom, prix, target }
   const add = () => {
     setcurrentBuyChallengeCard(currentCard)
-    console.log("ggg", currentBuyChallengeCard)
+
     if (currentBuyChallengeCard) {
       navigate("/buy-card")
     }
   }
-  console.log("ffff", currentCard)
+
   return (
     <>
       <div className="challenge-card">
         <img src={image} alt="" onClick={handleOpen} />
         <div className="detail-group">
           <div className="detail" onClick={handleOpen}>
-            En savoir plus
+            {prix && "Commencez le challenge "}
           </div>
           <div className="prix">{prix} $</div>
         </div>
@@ -66,7 +65,7 @@ const ChallengeCard = ({ image, prix, detail, nom, target }) => {
             {detail}
           </Typography>
           <button className="btn" onClick={add}>
-            Acheter la carte
+            Achetez la carte
           </button>
         </Box>
       </Modal>
