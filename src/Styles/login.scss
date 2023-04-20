@@ -131,7 +131,18 @@
 
         .text-register {
             text-align: center;
-            font-size: 12px;
+            font-size: 16px;
+            
+
+                font-size: 12px;
+                a{
+                   
+                   all: unset;
+                   margin-left: 0.5rem;
+                   color: rgb(47, 49, 163);
+                }
+       
+            
         }
     }
 

@@ -41,7 +41,7 @@ const Home = () => {
         <section className="ekz-classique">
           <h1 className="section-title"> Relevez un challenge</h1>
           <div className="cards-container">
-            {Challengeslist ? (
+            {Challengeslist.length !== 0 ? (
               Challengeslist.map((challenge) => (
                 <ChallengeCard
                   image={challenge.image}
