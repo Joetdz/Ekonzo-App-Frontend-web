@@ -30,7 +30,7 @@ const NoCardPage = () => {
           votre argent{" "}
         </p>
         <div className="cards-container">
-          {Challengeslist ? (
+          {Challengeslist.length !== 0 ? (
             Challengeslist.map((challenge) => (
               <ChallengeCard
                 image={challenge.image}
