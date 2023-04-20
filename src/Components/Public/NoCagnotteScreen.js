@@ -19,7 +19,7 @@ const NoCagnotteScreen = () => {
         <div className="illustration">
           <img src="rafiki.png" />
           <p>
-            Patience !<br /> <br /> Les Cagnottes seront bientôt disponibles!
+            Patience !<br /> <br /> Les cagnottes seront bientôt disponibles!
           </p>
         </div>
       </section>
