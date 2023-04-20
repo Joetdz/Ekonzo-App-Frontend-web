@@ -145,7 +145,7 @@ const BuyCard = () => {
           </div>
           <div className="btn">
             <button className="login-btn-local">
-              Commencez le challenge {isloading ? <AuthLoader /> : ""}
+              Payer la catre {isloading ? <AuthLoader /> : ""}
             </button>
           </div>
           <ToastContainer />
